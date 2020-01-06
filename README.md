@@ -1,18 +1,16 @@
 # SEUIF97
 
-SEUIF97 is the high-speed shared library for fast calculatiion of water and steam properties with IAPWS-IF97 formulation  
+SEUIF97 is the high-speed shared library of IAPWS-IF97. It is suitable for computation-intensive calculations，such as heat cycle calculations, simulations of non-stationary processes, real-time process monitoring and optimizations.   
  
-Through the high-speed library, the results of the IAPWS-IF97 are accurately produced at about 3 times computational speed than the repeated squaring method for fast computation of large positive integer powers. 
+Through the high-speed library, the results of the IAPWS-IF97 are accurately produced at about 3 times computational speed than the repeated squaring method for fast computation of integer powers, 10 times than the `math.pow()` in the standard library of the C. 
 
-The library is suitable for use in Computational Fluid Dynamics(CFD) or other computer-intensive calculations.
+The `dll` and `so` libraries for Windows and Linux(X86/X64):
 
-The library is written in ANSI C for faster, smaller binaries and better compatibility for accessing the DLL/SO from different programming languages.
- 
-For Windows and Linux users, the convenient binary library and APIs are provided.
- 
-* The shared library: Windows32/64: `libseuif97.dll`; Linux64: `libseuif97.so`
+* Windows32/64: `libseuif97.dll`; Linux64: `libseuif97.so`
 
-* The binding API: Python, C/C++, Microsoft Excel VBA, MATLAB,Java, Fortran, C# 
+The binding APIs for the programming languages:
+
+* Python, C/C++, Microsoft Excel VBA, MATLAB, Fortran, Java, C# 
 
 **Publications:**
 
@@ -20,8 +18,6 @@ For Windows and Linux users, the convenient binary library and APIs are provided
 
 * 芮嘉敏,孙振业,程懋华. 基于最短加法链状态空间树的IAPWS-IF97快速计算方法[J]. 汽轮机技术,2017,59(4):245-247 [[ pdf ]](./doc/基于最短加法链状态空间树的IAPWS-IF97快速计算方法.pdf)
  
-**Author:** Cheng Maohua, Southeast University, Nanjing，China  (cmh@seu.edu.cn)
-
 ## Functions of the SEUIF97 Shared Library
 
 Functions of water and steam properties, exergy analysis and the thermodynamic process of steam turbine are provided in **SEUIF97**
@@ -32,7 +28,7 @@ Using SEUIF97, you can set the state of steam using various pairs of know proper
 
 The following input pairs are implemented: 
 
-```c
+```
 (p,t) (p,h) (p,s) (p,v) (p,x) 
 
 (t,h) (t,s) (t,v) (t,x) 
@@ -130,7 +126,7 @@ If you have installed Python3.7 in the C:\Python37\, copy to
 
 If you have installed Python3.6(Ubuntu 18.04) 
    
-        $sudo cp seuif97.py /usr/lib/python3.6/
+       $sudo cp seuif97.py /usr/lib/python3.6/
 
 ### Usage
 
@@ -192,8 +188,16 @@ int main(void)
     printf("(p,t)(%.2f,%.2f) h= %.2f, s= %.4f, v= %.4f\n", p, t, h, s, v);
     return EXIT_SUCCESS;
 }
+```
+
+## [C/C++ Using MSVC](./demo-msvc)
+
+Build:
 
 ```
+>cl /Fedemo.exe /Fo./obj/demo.obj demo.c -I./include/  ./lib/libseuif97.lib
+```
+
 ## [MS Excel VBA(32/64)](./ExcelVBA)
 
 * Excel workbook(macro enabled) with seuif97 module to call Libseuif97.dll
@@ -266,7 +270,7 @@ program demo
 end program demo
 ```
 
-## [C Sharp](./demo-csharp)
+## [C#](./demo-csharp)
 
 In C#, using syntax like `h = Seuif97.seupt(p, t, 4)`
 
